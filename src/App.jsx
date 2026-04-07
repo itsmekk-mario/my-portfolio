@@ -5,17 +5,52 @@ function App() {
     Languages: ['Python', 'C', 'C++', 'Kotlin', 'TypeScript', 'Go'],
     'Robotics / Embedded': ['ROS2', 'Jetson Orin Nano', 'I2C', 'PWM', 'PCA9685', 'Linux'],
     'AI / Vision': ['YOLO', 'TensorRT', 'OpenCV', 'Flask'],
-    Tools: ['Git', 'GitHub', 'VS Code', 'Android Studio', 'Fusion 360'],
+    'Tools / System': ['Git', 'GitHub', 'VS Code', 'Android Studio', 'Fusion 360'],
   }
 
-  const projectHighlights = [
-    'ROS2-based autonomous driving architecture',
-    'PCA9685 motor and servo control',
-    'Flask web-based control interface',
-    'CSI camera streaming pipeline',
-    'YOLO object detection integration',
-    'Stereo depth estimation',
-    'AI-first decision structure',
+  const focusAreas = [
+    'Aerospace Engineering',
+    'Rocket Engineering',
+    'Robotics',
+    'Autonomous Systems',
+    'Computer Vision',
+    'Embedded Systems',
+    'AI-assisted Development',
+    'System Design',
+  ]
+
+  const projects = [
+    {
+      title: 'Jetson-based Autonomous Vehicle',
+      summary: 'ROS2-based autonomous driving platform built on Jetson Orin Nano.',
+      problem:
+        'Real-time perception, control, and decision logic had to work together as one integrated engineering system.',
+      architecture: [
+        'ROS2 node-based system structure',
+        'PCA9685 motor and servo control',
+        'Flask web interface for control and monitoring',
+        'CSI camera streaming pipeline',
+        'YOLO object detection',
+        'Stereo depth estimation',
+      ],
+      stack: 'ROS2, Python, OpenCV, YOLO, TensorRT, Flask, Linux, PCA9685',
+      result:
+        'Built an AI-first robotic vehicle pipeline that connects sensing, decision, and motion into one working system.',
+    },
+    {
+      title: 'Engineering Portfolio Website',
+      summary: 'A modern portfolio site designed as a personal engineering brand.',
+      problem:
+        'Needed a site that looks less like a student profile and more like a builder-focused technical identity.',
+      architecture: [
+        'Responsive React + Vite frontend',
+        'Structured engineering-first content layout',
+        'GitHub Pages deployment workflow',
+      ],
+      stack: 'React, Vite, CSS, GitHub Pages',
+      result:
+        'Created a clean and technical portfolio that presents projects, systems thinking, and engineering identity clearly.',
+    },
   ]
 
   return (
@@ -30,8 +65,9 @@ function App() {
 
         <nav className="nav">
           <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#project">Project</a>
+          <a href="#focus">Focus</a>
+          <a href="#skills">Stack</a>
+          <a href="#projects">Projects</a>
           <a href="#philosophy">Philosophy</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -47,21 +83,26 @@ function App() {
             </h1>
 
             <p className="hero-description">
-              I build systems that move — combining engineering, code, AI, and robotics.
+              I build real-world systems with software, AI, robotics, and control.
+            </p>
+
+            <p className="hero-description secondary">
+              High school developer focused on autonomy, perception, motion, and engineering-driven software.
             </p>
 
             <div className="hero-meta">
               <span>Boin High School Student</span>
               <span>AI Instructor</span>
               <span>Student Developer</span>
+              <span>Republic of Korea</span>
             </div>
 
             <div className="hero-actions">
-              <a className="btn btn-primary" href="#project">
+              <a className="btn btn-primary" href="#projects">
                 View Projects
               </a>
-              <a className="btn btn-secondary" href="#contact">
-                Contact
+              <a className="btn btn-secondary" href="https://github.com/itsmekk-mario" target="_blank" rel="noreferrer">
+                GitHub
               </a>
             </div>
           </div>
@@ -69,7 +110,7 @@ function App() {
           <div className="hero-right card glass">
             <div className="status-line">
               <span className="status-dot" />
-              Engineering-focused portfolio
+              Systems-first engineering portfolio
             </div>
 
             <div className="info-grid">
@@ -82,12 +123,12 @@ function App() {
                 <h3>AI · Robotics · Aerospace</h3>
               </div>
               <div className="info-item">
-                <p className="info-label">Location</p>
-                <h3>Republic of Korea</h3>
+                <p className="info-label">Approach</p>
+                <h3>Sense · Decide · Move</h3>
               </div>
               <div className="info-item">
-                <p className="info-label">Approach</p>
-                <h3>Systems, Motion, Intelligence</h3>
+                <p className="info-label">Build Style</p>
+                <h3>Systems, Control, Integration</h3>
               </div>
             </div>
           </div>
@@ -96,26 +137,43 @@ function App() {
         <section id="about" className="section">
           <div className="section-heading">
             <p className="section-kicker">About</p>
-            <h2>Engineering mindset, software execution.</h2>
+            <h2>Engineering mindset. Software execution.</h2>
           </div>
 
           <div className="card about-card">
             <p>
-              I am a high school student developer from the Republic of Korea who thinks in
-              systems and builds engineering-driven projects. My work sits at the intersection
-              of software, robotics, control, AI, and real-world motion.
+              I am a high school student developer from the Republic of Korea who thinks in systems
+              and builds engineering-driven projects across software, robotics, AI, and control.
             </p>
             <p>
-              I am especially interested in aerospace engineering, rocket engineering, robotics,
-              computer vision, autonomous systems, embedded systems, and AI-assisted development.
+              I am interested in designing systems that do more than compute — systems that perceive,
+              make decisions, and act in the real world.
             </p>
+          </div>
+        </section>
+
+        <section id="focus" className="section">
+          <div className="section-heading">
+            <p className="section-kicker">Engineering Focus</p>
+            <h2>Fields I want to build in.</h2>
+          </div>
+
+          <div className="skills-grid">
+            {focusAreas.map((item) => (
+              <article className="card skill-card" key={item}>
+                <h3>{item}</h3>
+                <p className="focus-text">
+                  Engineering-driven exploration through software, systems thinking, and real-world implementation.
+                </p>
+              </article>
+            ))}
           </div>
         </section>
 
         <section id="skills" className="section">
           <div className="section-heading">
             <p className="section-kicker">Tech Stack</p>
-            <h2>Built for intelligent systems.</h2>
+            <h2>Tools for intelligent systems.</h2>
           </div>
 
           <div className="skills-grid">
@@ -134,55 +192,63 @@ function App() {
           </div>
         </section>
 
-        <section id="project" className="section">
+        <section id="projects" className="section">
           <div className="section-heading">
-            <p className="section-kicker">Featured Project</p>
-            <h2>Jetson-based Autonomous Vehicle</h2>
+            <p className="section-kicker">Featured Projects</p>
+            <h2>Systems I built, not just pages I made.</h2>
           </div>
 
-          <div className="project-layout">
-            <article className="card project-main glass">
-              <div className="project-badge">Flagship Build</div>
-              <p className="project-description">
-                A ROS2-based autonomous driving car designed as an engineering system rather than
-                a simple demo. The vehicle integrates perception, control, motion logic, and a
-                web-based interface into a unified AI-first architecture.
-              </p>
-
-              <div className="project-points">
-                {projectHighlights.map((item) => (
-                  <div className="project-point" key={item}>
-                    <span className="project-point-mark" />
-                    <span>{item}</span>
+          <div className="projects-deep">
+            {projects.map((project) => (
+              <article className="card project-deep-card glass" key={project.title}>
+                <div className="project-top">
+                  <div>
+                    <p className="project-badge">Project</p>
+                    <h3>{project.title}</h3>
                   </div>
-                ))}
-              </div>
-            </article>
+                </div>
 
-            <aside className="card project-side">
-              <h3>System View</h3>
-              <ul className="system-list">
-                <li>Perception with YOLO + stereo depth</li>
-                <li>Control path through PCA9685 and embedded interfaces</li>
-                <li>Flask-based control and monitoring interface</li>
-                <li>Camera streaming with CSI pipeline</li>
-                <li>Decision structure oriented around AI-first operation</li>
-              </ul>
-            </aside>
+                <p className="project-summary">{project.summary}</p>
+
+                <div className="project-block">
+                  <h4>Problem</h4>
+                  <p>{project.problem}</p>
+                </div>
+
+                <div className="project-block">
+                  <h4>Architecture</h4>
+                  <ul className="system-list">
+                    {project.architecture.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="project-block">
+                  <h4>Stack</h4>
+                  <p>{project.stack}</p>
+                </div>
+
+                <div className="project-block">
+                  <h4>Result</h4>
+                  <p>{project.result}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
         <section id="philosophy" className="section">
           <div className="section-heading">
             <p className="section-kicker">Philosophy</p>
-            <h2>More than code.</h2>
+            <h2>Code is only part of the system.</h2>
           </div>
 
           <div className="card quote-card glass">
             <blockquote>"My first language is engineering."</blockquote>
             <p>
-              I do not just write code. I design systems, behavior, and motion — connecting
-              hardware, intelligence, and structure into something that works in the real world.
+              I do not just write code. I design systems, behavior, interfaces, and motion.
+              I care about how sensing, control, intelligence, and structure work together.
             </p>
           </div>
         </section>
@@ -190,7 +256,7 @@ function App() {
         <section id="contact" className="section">
           <div className="section-heading">
             <p className="section-kicker">Contact</p>
-            <h2>Let&apos;s build something meaningful.</h2>
+            <h2>Open to building meaningful systems.</h2>
           </div>
 
           <div className="contact-grid">
@@ -202,19 +268,19 @@ function App() {
             >
               <p className="contact-label">GitHub</p>
               <h3>itsmekk-mario</h3>
-              <span>View repositories</span>
+              <span>View repositories and engineering builds</span>
             </a>
 
             <a className="card contact-card" href="mailto:khk090525@gmail.com">
               <p className="contact-label">Email</p>
               <h3>khk090525@gmail.com</h3>
-              <span>Send a message</span>
+              <span>Contact for collaboration or projects</span>
             </a>
 
             <div className="card contact-card contact-placeholder">
-              <p className="contact-label">Future Portfolio / Blog</p>
+              <p className="contact-label">Future Blog / Lab Notes</p>
               <h3>Coming Soon</h3>
-              <span>Technical writing, build logs, and experiments</span>
+              <span>Build logs, engineering notes, experiments</span>
             </div>
           </div>
         </section>
