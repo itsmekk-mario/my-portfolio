@@ -38,14 +38,14 @@ const CONTENT_BY_LANG = {
       eyebrow: 'Republic of Korea · AI & Engineering',
       accent: '내 첫 번째 언어는 공학입니다.',
       description:
-        '소프트웨어, AI, 로보틱스, 제어를 실제 시스템으로 묶어 감지하고 판단하고 움직이는 결과물을 만듭니다.',
-      meta: ['보인고 학생', 'AI 강사', '학생 개발자', '시스템 중심 빌더'],
+        '소프트웨어, AI, 로보틱스, 제어를 하나의 시스템으로 엮어 실제로 감지하고 판단하고 움직이는 결과물을 설계합니다.',
+      meta: ['보인고 학생', 'AI 강사', '학생 개발자', 'Engineering Systems Builder'],
       actions: {
         projects: '프로젝트 보기',
         github: 'GitHub',
         blog: '블로그',
       },
-      status: 'Engineering-first portfolio',
+      status: '현재 집중: AI · Robotics · Autonomous Systems',
       info: [
         { label: '정체성', value: 'Young Engineer' },
         { label: '핵심 분야', value: 'AI · Robotics · Aerospace' },
@@ -55,16 +55,16 @@ const CONTENT_BY_LANG = {
     },
     about: {
       kicker: '소개',
-      title: '공학적 사고로 설계하고, 소프트웨어로 구현합니다.',
+      title: '공학적 사고로 구조를 만들고, 소프트웨어로 끝까지 구현합니다.',
       body: [
-        '저는 대한민국의 학생 개발자로서 시스템 관점에서 문제를 보고, 소프트웨어와 하드웨어가 함께 동작하는 결과물을 만드는 데 관심이 있습니다.',
-        '특히 항공우주공학, 로켓공학, 로보틱스, 자율주행, 컴퓨터 비전, 임베디드 제어, AI 기반 개발에 집중하고 있습니다.',
+        '저는 대한민국의 학생 개발자로서 기능 하나보다 전체 흐름을 먼저 봅니다. 문제를 시스템 관점에서 정의하고, 소프트웨어와 하드웨어가 함께 동작하는 구조로 풀어내는 데 관심이 있습니다.',
+        '특히 항공우주공학, 로켓공학, 로보틱스, 자율 시스템, 컴퓨터 비전, 임베디드 제어, AI 기반 개발을 중심으로 실제 구현 경험을 쌓고 있습니다.',
       ],
     },
     focus: {
       kicker: '관심 분야',
-      title: '내가 깊게 만들고 싶은 영역',
-      cardText: '소프트웨어와 시스템 사고를 기반으로 실제 동작하는 공학 결과물을 지향합니다.',
+      title: '깊게 파고들고 싶은 분야',
+      cardText: '이론에 머무르지 않고, 실제로 동작하는 시스템을 만드는 방향으로 공부하고 개발합니다.',
       areas: [
         '항공우주공학',
         '로켓공학',
@@ -78,7 +78,7 @@ const CONTENT_BY_LANG = {
     },
     stack: {
       kicker: '기술 스택',
-      title: '지능형 시스템을 만들기 위한 도구들',
+      title: '지능형 시스템을 구현하기 위한 도구들',
       skills: {
         언어: ['Python', 'C', 'C++', 'Kotlin', 'TypeScript', 'Go'],
         '로보틱스 / 임베디드': ['ROS2', 'Jetson Orin Nano', 'I2C', 'PWM', 'PCA9685', 'Linux'],
@@ -92,25 +92,25 @@ const CONTENT_BY_LANG = {
       badge: 'Flagship Build',
       githubLink: 'GitHub 보기',
       summary:
-        'Jetson Orin Nano 위에서 동작하는 ROS2 기반 자율주행 플랫폼입니다. 단순 데모가 아니라 인지, 제어, 인터페이스를 하나의 공학 시스템으로 설계했습니다.',
+        'Jetson Orin Nano 위에서 동작하는 ROS2 기반 자율주행 플랫폼입니다. 단순한 데모가 아니라 인지, 판단, 제어, 인터페이스가 하나의 흐름으로 이어지는 공학 시스템으로 설계했습니다.',
       highlights: [
         {
           label: '문제',
-          text: '인지, 판단, 구동이 분리되지 않고 실시간으로 연결되는 로보틱스 시스템을 만드는 것.',
+          text: '인지, 판단, 구동이 따로 노는 것이 아니라 실시간으로 연결되는 자율주행 시스템을 만드는 것.',
         },
         {
           label: '구성',
-          text: 'ROS2 노드 구조, Flask 제어 인터페이스, PCA9685 기반 모터 제어, CSI 카메라, YOLO 탐지, 깊이 추정.',
+          text: 'ROS2 노드 구조, Flask 제어 인터페이스, PCA9685 기반 모터 및 서보 제어, CSI 카메라 파이프라인, YOLO 탐지, 깊이 추정.',
         },
         {
           label: '결과',
-          text: '화려한 데모보다 안정적인 동작 흐름과 통합 설계를 우선한 AI 자율주행 프로토타입.',
+          text: '화려한 연출보다 안정적인 동작 흐름과 통합 품질을 우선한 AI 자율주행 프로토타입.',
         },
       ],
     },
     blog: {
       kicker: '블로그',
-      title: '리포지토리에서 관리되는 배포형 글 목록입니다.',
+      title: '프로젝트 기록과 공학 메모를 정리하는 공간입니다.',
       noteStrong: '작성과 배포:',
       note:
         '`public/content/posts.ko.json`과 `public/content/posts.en.json`을 수정한 뒤 커밋하면 GitHub Pages에 자동 반영됩니다.',
@@ -119,7 +119,7 @@ const CONTENT_BY_LANG = {
     },
     guestbook: {
       kicker: '방명록',
-      title: '방문 기록을 남겨 주세요.',
+      title: '방문 기록이나 짧은 의견을 남겨 주세요.',
       note: 'GitHub 계정으로 댓글을 남길 수 있습니다.',
     },
     philosophy: {
@@ -131,14 +131,14 @@ const CONTENT_BY_LANG = {
     },
     contact: {
       kicker: '연락',
-      title: '의미 있는 프로젝트와 기술 협업에 열려 있습니다.',
+      title: '의미 있는 프로젝트와 진지한 기술 협업에 열려 있습니다.',
       githubLabel: 'GitHub',
       githubHint: '리포지토리, 코드, 엔지니어링 빌드',
       emailLabel: 'Email',
       emailHint: '협업 또는 프로젝트 관련 연락',
-      futureLabel: '다음 글',
-      futureTitle: '블로그 / 노트',
-      futureHint: '리포지토리의 posts JSON을 수정하면 바로 배포됩니다.',
+      futureLabel: '현재 관심사',
+      futureTitle: 'Autonomy / Robotics / Aerospace',
+      futureHint: '지능형 시스템과 공학적 구현이 만나는 작업을 계속 확장하고 있습니다.',
     },
   },
   en: {
@@ -157,14 +157,14 @@ const CONTENT_BY_LANG = {
       eyebrow: 'Republic of Korea · AI & Engineering',
       accent: 'My first language is engineering.',
       description:
-        'I build systems that sense, decide, and move by combining software, AI, robotics, and control into real-world engineering projects.',
-      meta: ['Boin High School Student', 'AI Instructor', 'Student Developer', 'Systems-first Builder'],
+        'I design real-world systems that sense, decide, and move by combining software, AI, robotics, and control into one engineering flow.',
+      meta: ['Boin High School Student', 'AI Instructor', 'Student Developer', 'Engineering Systems Builder'],
       actions: {
         projects: 'View Projects',
         github: 'GitHub',
         blog: 'Lab Notes',
       },
-      status: 'Engineering-first portfolio',
+      status: 'Current focus: AI · Robotics · Autonomous Systems',
       info: [
         { label: 'Identity', value: 'Young Engineer' },
         { label: 'Core Fields', value: 'AI · Robotics · Aerospace' },
@@ -174,17 +174,17 @@ const CONTENT_BY_LANG = {
     },
     about: {
       kicker: 'About',
-      title: 'Engineering mindset. Software execution.',
+      title: 'Engineering mindset. Software taken to implementation.',
       body: [
-        'I am a student developer from the Republic of Korea who thinks in systems and builds engineering-driven projects across software, robotics, AI, and control.',
-        'My strongest interests are aerospace engineering, rocket engineering, autonomous systems, computer vision, embedded control, and AI-assisted development.',
+        'I am a student developer from the Republic of Korea who starts from system structure rather than isolated features. I like turning engineering problems into working implementations across software and hardware.',
+        'My strongest interests are aerospace engineering, rocket engineering, robotics, autonomous systems, computer vision, embedded control, and AI-assisted development.',
       ],
     },
     focus: {
       kicker: 'Engineering Focus',
-      title: 'Fields I want to build in.',
+      title: 'Fields I want to go deep in.',
       cardText:
-        'I care about real implementation, system structure, and engineering behavior rather than isolated features.',
+        'I care about implementation quality, system structure, and real engineering behavior rather than isolated features.',
       areas: [
         'Aerospace Engineering',
         'Rocket Engineering',
@@ -198,7 +198,7 @@ const CONTENT_BY_LANG = {
     },
     stack: {
       kicker: 'Tech Stack',
-      title: 'Tools for intelligent systems.',
+      title: 'Tools I use to build intelligent systems.',
       skills: {
         Languages: ['Python', 'C', 'C++', 'Kotlin', 'TypeScript', 'Go'],
         'Robotics / Embedded': ['ROS2', 'Jetson Orin Nano', 'I2C', 'PWM', 'PCA9685', 'Linux'],
@@ -212,7 +212,7 @@ const CONTENT_BY_LANG = {
       badge: 'Flagship Build',
       githubLink: 'View GitHub',
       summary:
-        'A ROS2-based autonomous driving platform built on Jetson Orin Nano, designed as an engineering system instead of a one-off demo.',
+        'A ROS2-based autonomous driving platform built on Jetson Orin Nano, designed as an integrated engineering system rather than a one-off demo.',
       highlights: [
         {
           label: 'Problem',
@@ -224,13 +224,13 @@ const CONTENT_BY_LANG = {
         },
         {
           label: 'Result',
-          text: 'An AI-first autonomous driving prototype focused on integration quality, control flow, and reliable behavior.',
+          text: 'An autonomous driving prototype focused on integration quality, control flow, and reliable behavior over visual flash.',
         },
       ],
     },
     blog: {
       kicker: 'Lab Notes',
-      title: 'A deploy-ready post list managed in the repository.',
+      title: 'A place for project logs and engineering notes.',
       noteStrong: 'Authoring and deploy:',
       note:
         'Edit `public/content/posts.en.json` and `public/content/posts.ko.json`, then commit and push to publish automatically on GitHub Pages.',
@@ -239,7 +239,7 @@ const CONTENT_BY_LANG = {
     },
     guestbook: {
       kicker: 'Guestbook',
-      title: 'Leave a note.',
+      title: 'Leave a short note.',
       note: 'Comments are posted with a GitHub account.',
     },
     philosophy: {
@@ -251,14 +251,14 @@ const CONTENT_BY_LANG = {
     },
     contact: {
       kicker: 'Contact',
-      title: 'Open to meaningful projects and technical collaboration.',
+      title: 'Open to meaningful projects and serious technical collaboration.',
       githubLabel: 'GitHub',
       githubHint: 'Repositories, code, engineering builds',
       emailLabel: 'Email',
       emailHint: 'Contact for collaboration or projects',
-      futureLabel: 'Future Writing',
-      futureTitle: 'Lab Notes / Blog',
-      futureHint: 'Deploy by editing the posts JSON files in the repository.',
+      futureLabel: 'Current Interest',
+      futureTitle: 'Autonomy / Robotics / Aerospace',
+      futureHint: 'I am continuing to expand projects where intelligent systems meet real engineering.',
     },
   },
 }
@@ -276,7 +276,7 @@ function formatDate(value, locale) {
   }
 }
 
-function Utterances({ repo, theme = 'github-dark', issueTerm = 'pathname' }) {
+function Utterances({ repo, theme = 'github-light', issueTerm = 'pathname' }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -705,7 +705,7 @@ function App() {
 
           <div className="card glass guestbook-card">
             <p className="guestbook-note">{copy.guestbook.note}</p>
-            <Utterances repo="itsmekk-mario/my-portfolio" theme="github-dark" issueTerm="pathname" />
+            <Utterances repo="itsmekk-mario/my-portfolio" theme="github-light" issueTerm="pathname" />
           </div>
         </section>
 

@@ -1,8 +1,8 @@
 :root {
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #edf4ff;
-  background-color: #07111f;
+  color: #1c2a3a;
+  background-color: #f6f1e8;
   line-height: 1.5;
   font-weight: 400;
   scroll-behavior: smooth;
@@ -11,18 +11,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --bg: #07111f;
-  --bg-soft: rgba(10, 20, 36, 0.74);
-  --panel: rgba(13, 25, 44, 0.84);
-  --panel-border: rgba(130, 180, 255, 0.14);
-  --panel-hover: rgba(20, 36, 58, 0.92);
-  --text: #edf4ff;
-  --muted: #a9bbd3;
-  --soft: #d7e4f5;
-  --cyan: #68e1fd;
-  --blue: #75a7ff;
-  --accent-gradient: linear-gradient(135deg, #7dc7ff 0%, #68e1fd 45%, #8ca0ff 100%);
-  --shadow: 0 10px 40px rgba(0, 0, 0, 0.28);
+  --bg: #f6f1e8;
+  --bg-soft: rgba(255, 250, 244, 0.78);
+  --panel: rgba(255, 252, 247, 0.84);
+  --panel-border: rgba(116, 138, 165, 0.16);
+  --panel-hover: rgba(255, 248, 239, 0.98);
+  --text: #1c2a3a;
+  --muted: #617489;
+  --soft: #41556b;
+  --cyan: #4bbecf;
+  --blue: #4f83d1;
+  --accent-gradient: linear-gradient(135deg, #d66d4b 0%, #f0a35a 45%, #f6c66a 100%);
+  --shadow: 0 18px 55px rgba(108, 84, 56, 0.12);
 }
 
 * {
@@ -37,9 +37,9 @@ body,
   min-width: 320px;
   min-height: 100%;
   background:
-    radial-gradient(circle at top left, rgba(92, 146, 255, 0.12), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(80, 238, 255, 0.1), transparent 24%),
-    linear-gradient(180deg, #07111f 0%, #08131f 48%, #050c16 100%);
+    radial-gradient(circle at top left, rgba(240, 172, 95, 0.24), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(118, 188, 212, 0.18), transparent 24%),
+    linear-gradient(180deg, #fbf7f1 0%, #f6efe3 46%, #f3eadc 100%);
   color: var(--text);
 }
 
@@ -71,8 +71,8 @@ button {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    linear-gradient(rgba(65, 85, 107, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(65, 85, 107, 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(circle at center, black 35%, transparent 92%);
   opacity: 0.35;
@@ -92,7 +92,7 @@ button {
   height: 320px;
   top: 80px;
   left: -70px;
-  background: rgba(85, 144, 255, 0.18);
+  background: rgba(241, 171, 89, 0.34);
 }
 
 .bg-orb-2 {
@@ -100,7 +100,7 @@ button {
   height: 280px;
   bottom: 100px;
   right: -40px;
-  background: rgba(77, 238, 255, 0.12);
+  background: rgba(102, 184, 208, 0.22);
 }
 
 .header,
@@ -120,8 +120,8 @@ button {
   position: sticky;
   top: 0;
   backdrop-filter: blur(14px);
-  background: linear-gradient(180deg, rgba(7, 17, 31, 0.9) 0%, rgba(7, 17, 31, 0.58) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, rgba(251, 247, 241, 0.92) 0%, rgba(251, 247, 241, 0.72) 100%);
+  border-bottom: 1px solid rgba(65, 85, 107, 0.08);
 }
 
 .brand {
@@ -129,7 +129,7 @@ button {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: lowercase;
-  color: #f6fbff;
+  color: #243446;
 }
 
 .nav {
@@ -167,14 +167,14 @@ button {
   height: 2px;
   border-radius: 999px;
   background: var(--accent-gradient);
-  box-shadow: 0 10px 30px rgba(104, 225, 253, 0.14);
+  box-shadow: 0 10px 30px rgba(214, 109, 75, 0.16);
   transition: transform 220ms ease, width 220ms ease, opacity 220ms ease;
   pointer-events: none;
 }
 
 .lang-toggle {
-  border: 1px solid rgba(136, 173, 255, 0.18);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(79, 131, 209, 0.16);
+  background: rgba(255, 255, 255, 0.56);
   color: var(--soft);
   border-radius: 999px;
   padding: 8px 12px;
@@ -187,8 +187,8 @@ button {
 .lang-toggle:hover {
   transform: translateY(-1px);
   color: var(--text);
-  border-color: rgba(104, 225, 253, 0.45);
-  background: rgba(104, 225, 253, 0.08);
+  border-color: rgba(214, 109, 75, 0.28);
+  background: rgba(240, 163, 90, 0.1);
 }
 
 .app {
@@ -220,7 +220,7 @@ button {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  color: #8dc7ff;
+  color: #b8673d;
 }
 
 .hero h1 {
@@ -259,9 +259,9 @@ button {
 .hero-meta span {
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(125, 178, 255, 0.16);
-  background: rgba(255, 255, 255, 0.02);
-  color: #dbe8f8;
+  border: 1px solid rgba(79, 131, 209, 0.12);
+  background: rgba(255, 255, 255, 0.5);
+  color: #3d5065;
   font-size: 0.92rem;
 }
 
@@ -306,19 +306,19 @@ button {
 
 .btn-primary {
   background: var(--accent-gradient);
-  color: #03111d;
-  box-shadow: 0 10px 30px rgba(101, 187, 255, 0.18);
+  color: #2f1a11;
+  box-shadow: 0 12px 30px rgba(214, 109, 75, 0.18);
 }
 
 .btn-secondary,
 .mini-btn {
-  border: 1px solid rgba(136, 173, 255, 0.18);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(79, 131, 209, 0.14);
+  background: rgba(255, 255, 255, 0.58);
   color: var(--text);
 }
 
 .btn-ghost {
-  border: 1px dashed rgba(136, 173, 255, 0.18);
+  border: 1px dashed rgba(79, 131, 209, 0.18);
   background: transparent;
   color: var(--soft);
 }
@@ -346,7 +346,7 @@ button {
 
 .subtle-card {
   padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .hero-panel,
@@ -366,7 +366,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d9e8ff;
+  color: #3d5065;
   margin-bottom: 22px;
 }
 
@@ -374,8 +374,8 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: #6cf0ff;
-  box-shadow: 0 0 18px rgba(108, 240, 255, 0.6);
+  background: #f0a35a;
+  box-shadow: 0 0 18px rgba(240, 163, 90, 0.45);
 }
 
 .info-grid {
@@ -388,8 +388,8 @@ button {
 .project-block {
   padding: 18px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(137, 179, 255, 0.1);
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(79, 131, 209, 0.1);
 }
 
 .info-item h3,
@@ -399,7 +399,7 @@ button {
 .focus-card h3,
 .skill-card h3 {
   margin: 10px 0 0;
-  color: #f3f8ff;
+  color: #223144;
 }
 
 .project-block h4 {
@@ -407,7 +407,7 @@ button {
   font-size: 0.92rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8dc7ff;
+  color: #b8673d;
 }
 
 .section-heading {
@@ -471,9 +471,9 @@ button {
 .post-tags span {
   padding: 9px 13px;
   border-radius: 999px;
-  background: rgba(113, 177, 255, 0.09);
-  border: 1px solid rgba(127, 170, 255, 0.12);
-  color: #eaf4ff;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(79, 131, 209, 0.12);
+  color: #2c4056;
   font-size: 0.9rem;
 }
 
@@ -485,7 +485,7 @@ button {
 }
 
 .inline-link {
-  color: #bcd8ff;
+  color: #3f74c4;
 }
 
 .project-summary {
@@ -534,15 +534,15 @@ button {
   text-align: left;
   padding: 16px;
   border-radius: 18px;
-  border: 1px solid rgba(137, 179, 255, 0.1);
-  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(79, 131, 209, 0.1);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--text);
 }
 
 .post-item:hover,
 .post-item.active {
-  background: rgba(117, 167, 255, 0.08);
-  border-color: rgba(136, 173, 255, 0.2);
+  background: rgba(240, 163, 90, 0.12);
+  border-color: rgba(214, 109, 75, 0.2);
 }
 
 .post-item-top {
@@ -562,7 +562,7 @@ button {
 
 .post-item small,
 .post-meta-line {
-  color: #b1c3dc;
+  color: #72849a;
 }
 
 .post-meta-line {
@@ -607,8 +607,8 @@ button {
 .editor-form input,
 .editor-form textarea {
   width: 100%;
-  border: 1px solid rgba(136, 173, 255, 0.18);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(79, 131, 209, 0.16);
+  background: rgba(255, 255, 255, 0.6);
   color: var(--text);
   border-radius: 14px;
   padding: 14px 16px;
@@ -617,8 +617,8 @@ button {
 
 .editor-form input:focus,
 .editor-form textarea:focus {
-  border-color: rgba(104, 225, 253, 0.6);
-  box-shadow: 0 0 0 3px rgba(104, 225, 253, 0.1);
+  border-color: rgba(214, 109, 75, 0.45);
+  box-shadow: 0 0 0 3px rgba(240, 163, 90, 0.14);
 }
 
 .quote-card blockquote {
@@ -626,7 +626,7 @@ button {
   font-size: clamp(1.7rem, 4vw, 2.7rem);
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: #f4f9ff;
+  color: #223144;
 }
 
 .guestbook-card {
@@ -671,7 +671,7 @@ button {
 
 .contact-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(108, 225, 255, 0.22);
+  border-color: rgba(214, 109, 75, 0.24);
   background: var(--panel-hover);
 }
 
