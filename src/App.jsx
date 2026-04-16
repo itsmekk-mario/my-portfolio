@@ -17,7 +17,8 @@ function getStoredLang() {
 
 function getPostsUrl(lang) {
   const path = POSTS_PATH_BY_LANG[lang] ?? POSTS_PATH_BY_LANG[DEFAULT_LANG]
-  return new URL(path, window.location.origin + import.meta.env.BASE_URL).toString()
+  const basePath = import.meta.env.BASE_URL || './'
+  return new URL(`${basePath}${path}`, window.location.href).toString()
 }
 
 const CONTENT_BY_LANG = {
