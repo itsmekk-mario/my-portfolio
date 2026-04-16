@@ -30,6 +30,7 @@ const CONTENT_BY_LANG = {
       { id: 'focus', label: '분야' },
       { id: 'stack', label: '기술' },
       { id: 'projects', label: '프로젝트' },
+      { id: 'roadmap', label: '로드맵' },
       { id: 'blog', label: '블로그' },
       { id: 'guestbook', label: '방명록' },
       { id: 'contact', label: '연락' },
@@ -39,7 +40,7 @@ const CONTENT_BY_LANG = {
       accent: '내 첫 번째 언어는 공학입니다.',
       description:
         '소프트웨어, AI, 로보틱스, 제어를 하나의 시스템으로 엮어 실제로 감지하고 판단하고 움직이는 결과물을 설계합니다.',
-      meta: ['보인고 학생', 'AI 강사', '학생 개발자', 'Engineering Systems Builder'],
+      meta: ['보인고 학생', '학생 개발자', 'Engineering Systems Builder'],
       actions: {
         projects: '프로젝트 보기',
         github: 'GitHub',
@@ -108,6 +109,31 @@ const CONTENT_BY_LANG = {
         },
       ],
     },
+    roadmap: {
+      kicker: '로드맵',
+      title: '자율주행 시스템 개발 로드맵',
+      description: '차체 제어부터 자율주행 통합, 그리고 차량 간 통신까지 단계적으로 확장하고 있습니다.',
+      phases: [
+        {
+          stage: '01',
+          title: '저수준 차체 제어 성공',
+          status: 'Completed',
+          detail: '조향과 구동을 제어 계층에서 안정적으로 다루고, 하드웨어 레벨의 기본 응답성을 확보했습니다.',
+        },
+        {
+          stage: '02',
+          title: '자율주행 구현 중',
+          status: 'In Progress',
+          detail: '인지, 판단, 제어를 하나의 파이프라인으로 통합하면서 실제 주행 흐름과 안정성을 다듬고 있습니다.',
+        },
+        {
+          stage: '03',
+          title: 'V2V 실현 예정',
+          status: 'Planned',
+          detail: '단일 차량을 넘어 차량 간 정보 공유와 협력 주행이 가능한 구조로 확장할 계획입니다.',
+        },
+      ],
+    },
     blog: {
       kicker: '블로그',
       title: '프로젝트 기록과 공학 메모를 정리하는 공간입니다.',
@@ -149,6 +175,7 @@ const CONTENT_BY_LANG = {
       { id: 'focus', label: 'Focus' },
       { id: 'stack', label: 'Stack' },
       { id: 'projects', label: 'Projects' },
+      { id: 'roadmap', label: 'Roadmap' },
       { id: 'blog', label: 'Lab Notes' },
       { id: 'guestbook', label: 'Guestbook' },
       { id: 'contact', label: 'Contact' },
@@ -158,7 +185,7 @@ const CONTENT_BY_LANG = {
       accent: 'My first language is engineering.',
       description:
         'I design real-world systems that sense, decide, and move by combining software, AI, robotics, and control into one engineering flow.',
-      meta: ['Boin High School Student', 'AI Instructor', 'Student Developer', 'Engineering Systems Builder'],
+      meta: ['Boin High School Student', 'Student Developer', 'Engineering Systems Builder'],
       actions: {
         projects: 'View Projects',
         github: 'GitHub',
@@ -225,6 +252,31 @@ const CONTENT_BY_LANG = {
         {
           label: 'Result',
           text: 'An autonomous driving prototype focused on integration quality, control flow, and reliable behavior over visual flash.',
+        },
+      ],
+    },
+    roadmap: {
+      kicker: 'Roadmap',
+      title: 'Autonomous Systems Development Roadmap',
+      description: 'The work is moving in stages from low-level vehicle control to integrated autonomy and future inter-vehicle communication.',
+      phases: [
+        {
+          stage: '01',
+          title: 'Low-level chassis control completed',
+          status: 'Completed',
+          detail: 'Steering and drive control were stabilized at the control layer, establishing reliable hardware-level response.',
+        },
+        {
+          stage: '02',
+          title: 'Autonomous driving in progress',
+          status: 'In Progress',
+          detail: 'Perception, decision, and control are being integrated into one pipeline with a focus on real driving flow and stability.',
+        },
+        {
+          stage: '03',
+          title: 'V2V implementation planned',
+          status: 'Planned',
+          detail: 'The next step is extending beyond a single vehicle toward shared data and cooperative driving between vehicles.',
         },
       ],
     },
@@ -611,6 +663,29 @@ function App() {
                 ))}
               </div>
             </article>
+          </div>
+        </section>
+
+        <section id="roadmap" className="section">
+          <div className="section-heading">
+            <p className="section-kicker">{copy.roadmap.kicker}</p>
+            <h2>{copy.roadmap.title}</h2>
+            <p className="section-description">{copy.roadmap.description}</p>
+          </div>
+
+          <div className="roadmap-grid">
+            {copy.roadmap.phases.map((phase) => (
+              <article className="card roadmap-card" key={phase.stage}>
+                <div className="roadmap-topline">
+                  <span className="roadmap-stage">{phase.stage}</span>
+                  <span className={`roadmap-status roadmap-status-${phase.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                    {phase.status}
+                  </span>
+                </div>
+                <h3>{phase.title}</h3>
+                <p>{phase.detail}</p>
+              </article>
+            ))}
           </div>
         </section>
 

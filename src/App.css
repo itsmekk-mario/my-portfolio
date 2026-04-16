@@ -434,6 +434,7 @@ button {
 .focus-card p,
 .project-summary,
 .project-block p,
+.roadmap-card p,
 .quote-card p,
 .blog-note,
 .post-item p,
@@ -441,6 +442,14 @@ button {
 .post-excerpt,
 .contact-card span {
   color: var(--muted);
+}
+
+.section-description {
+  margin: 14px 0 0;
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
 }
 
 .about-card p + p,
@@ -499,6 +508,75 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 24px;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.roadmap-card {
+  padding: 28px;
+}
+
+.roadmap-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.roadmap-stage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(79, 131, 209, 0.12);
+  color: #b8673d;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.roadmap-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.roadmap-status-completed {
+  background: rgba(120, 185, 110, 0.14);
+  color: #3f7e39;
+}
+
+.roadmap-status-in-progress {
+  background: rgba(240, 163, 90, 0.16);
+  color: #a45b27;
+}
+
+.roadmap-status-planned {
+  background: rgba(79, 131, 209, 0.12);
+  color: #3f74c4;
+}
+
+.roadmap-card h3 {
+  margin: 18px 0 0;
+  color: #223144;
+  font-size: 1.24rem;
+  line-height: 1.35;
+}
+
+.roadmap-card p {
+  margin: 14px 0 0;
+  line-height: 1.72;
 }
 
 .blog-layout {
@@ -692,6 +770,7 @@ button {
   .hero,
   .blog-layout,
   .project-detail-grid,
+  .roadmap-grid,
   .focus-grid,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -823,6 +902,7 @@ button {
   .focus-grid,
   .contact-grid,
   .project-detail-grid,
+  .roadmap-grid,
   .blog-layout {
     grid-template-columns: 1fr;
     gap: 14px;
