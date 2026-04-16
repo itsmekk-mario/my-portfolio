@@ -4,15 +4,15 @@ import './App.css'
 const DEFAULT_LANG = 'ko'
 const LANG_STORAGE_KEY = 'kown-portfolio-lang-v1'
 
-function getStoredLang() {
-  if (typeof window === 'undefined') return DEFAULT_LANG
-  const stored = window.localStorage.getItem(LANG_STORAGE_KEY)
-  return stored === 'en' || stored === 'ko' ? stored : DEFAULT_LANG
-}
-
 const POSTS_PATH_BY_LANG = {
   ko: 'content/posts.ko.json',
   en: 'content/posts.en.json',
+}
+
+function getStoredLang() {
+  if (typeof window === 'undefined') return DEFAULT_LANG
+  const stored = window.localStorage.getItem(LANG_STORAGE_KEY)
+  return stored === 'ko' || stored === 'en' ? stored : DEFAULT_LANG
 }
 
 function getPostsUrl(lang) {
@@ -23,48 +23,47 @@ function getPostsUrl(lang) {
 const CONTENT_BY_LANG = {
   ko: {
     locale: 'ko-KR',
-    langName: 'KO',
     langToggle: 'EN',
     nav: [
       { id: 'about', label: '소개' },
-      { id: 'focus', label: '관심 분야' },
-      { id: 'stack', label: '기술 스택' },
+      { id: 'focus', label: '분야' },
+      { id: 'stack', label: '기술' },
       { id: 'projects', label: '프로젝트' },
-      { id: 'blog', label: '랩 노트' },
+      { id: 'blog', label: '블로그' },
       { id: 'guestbook', label: '방명록' },
       { id: 'contact', label: '연락' },
     ],
     hero: {
-      eyebrow: '대한민국 · AI & Engineering',
-      accent: '제 모국어는 엔지니어링입니다.',
+      eyebrow: 'Republic of Korea · AI & Engineering',
+      accent: '내 첫 번째 언어는 공학입니다.',
       description:
-        '센싱하고, 판단하고, 움직이는 시스템을 만듭니다 — 소프트웨어·AI·로보틱스·제어를 실제 엔지니어링 프로젝트로 통합합니다.',
-      meta: ['보인고 재학생', 'AI 강사', '학생 개발자', '시스템 중심 빌더'],
+        '소프트웨어, AI, 로보틱스, 제어를 실제 시스템으로 묶어 감지하고 판단하고 움직이는 결과물을 만듭니다.',
+      meta: ['보인고 학생', 'AI 강사', '학생 개발자', '시스템 중심 빌더'],
       actions: {
         projects: '프로젝트 보기',
         github: 'GitHub',
-        blog: '랩 노트',
+        blog: '블로그',
       },
-      status: '엔지니어링 중심 포트폴리오',
+      status: 'Engineering-first portfolio',
       info: [
-        { label: '정체성', value: '젊은 엔지니어' },
+        { label: '정체성', value: 'Young Engineer' },
         { label: '핵심 분야', value: 'AI · Robotics · Aerospace' },
-        { label: '방법론', value: '시스템 설계' },
-        { label: '접근', value: '감지 → 판단 → 움직임' },
+        { label: '방법론', value: 'System Design' },
+        { label: '접근', value: 'Sense · Decide · Move' },
       ],
     },
     about: {
       kicker: '소개',
-      title: '엔지니어링 사고, 소프트웨어 실행.',
+      title: '공학적 사고로 설계하고, 소프트웨어로 구현합니다.',
       body: [
-        '저는 대한민국에서 시스템을 먼저 생각하며 소프트웨어, 로보틱스, AI, 제어를 넘나드는 엔지니어링 프로젝트를 만드는 고등학생 개발자입니다.',
-        '특히 항공우주공학, 로켓공학, 자율 시스템, 컴퓨터 비전, 임베디드 제어, AI 보조 개발에 관심이 있습니다.',
+        '저는 대한민국의 학생 개발자로서 시스템 관점에서 문제를 보고, 소프트웨어와 하드웨어가 함께 동작하는 결과물을 만드는 데 관심이 있습니다.',
+        '특히 항공우주공학, 로켓공학, 로보틱스, 자율주행, 컴퓨터 비전, 임베디드 제어, AI 기반 개발에 집중하고 있습니다.',
       ],
     },
     focus: {
-      kicker: '엔지니어링 관심',
-      title: '제가 만들고 싶은 분야들.',
-      cardText: '소프트웨어와 시스템 사고, 그리고 실전 구현으로 공학적 탐구를 이어갑니다.',
+      kicker: '관심 분야',
+      title: '내가 깊게 만들고 싶은 영역',
+      cardText: '소프트웨어와 시스템 사고를 기반으로 실제 동작하는 공학 결과물을 지향합니다.',
       areas: [
         '항공우주공학',
         '로켓공학',
@@ -78,7 +77,7 @@ const CONTENT_BY_LANG = {
     },
     stack: {
       kicker: '기술 스택',
-      title: '지능형 시스템을 위한 도구들.',
+      title: '지능형 시스템을 만들기 위한 도구들',
       skills: {
         언어: ['Python', 'C', 'C++', 'Kotlin', 'TypeScript', 'Go'],
         '로보틱스 / 임베디드': ['ROS2', 'Jetson Orin Nano', 'I2C', 'PWM', 'PCA9685', 'Linux'],
@@ -88,65 +87,61 @@ const CONTENT_BY_LANG = {
     },
     projects: {
       kicker: '대표 프로젝트',
-      title: 'Jetson 기반 자율주행 플랫폼',
-      badge: '대표 빌드',
+      title: 'Jetson 기반 자율주행 차량',
+      badge: 'Flagship Build',
       githubLink: 'GitHub 보기',
       summary:
-        'Jetson Orin Nano 위에서 동작하는 ROS2 기반 자율주행 플랫폼. 단일 데모가 아니라 “엔지니어링 시스템”으로 설계했습니다.',
+        'Jetson Orin Nano 위에서 동작하는 ROS2 기반 자율주행 플랫폼입니다. 단순 데모가 아니라 인지, 제어, 인터페이스를 하나의 공학 시스템으로 설계했습니다.',
       highlights: [
         {
           label: '문제',
-          text:
-            '인지, 의사결정 로직, 구동이 하나의 통합 시스템으로 실시간 동작하는 로보틱스 플랫폼을 만드는 것.',
+          text: '인지, 판단, 구동이 분리되지 않고 실시간으로 연결되는 로보틱스 시스템을 만드는 것.',
         },
         {
-          label: '아키텍처',
-          text:
-            'ROS2 노드 구조, Flask 제어 인터페이스, PCA9685 모터/서보 제어, CSI 카메라 파이프라인, YOLO 탐지, 스테레오 깊이 추정.',
+          label: '구성',
+          text: 'ROS2 노드 구조, Flask 제어 인터페이스, PCA9685 기반 모터 제어, CSI 카메라, YOLO 탐지, 깊이 추정.',
         },
         {
           label: '결과',
-          text:
-            '화려한 데모보다 통합·제어 흐름·엔지니어링 동작을 우선한 AI 중심 자율주행 프로토타입.',
+          text: '화려한 데모보다 안정적인 동작 흐름과 통합 설계를 우선한 AI 자율주행 프로토타입.',
         },
       ],
     },
     blog: {
-      kicker: '랩 노트',
-      title: '리포지토리에서 관리되는 배포용 글 목록입니다.',
-      noteStrong: '작성/배포:',
+      kicker: '블로그',
+      title: '리포지토리에서 관리되는 배포형 글 목록입니다.',
+      noteStrong: '작성과 배포:',
       note:
-        '글은 `public/content/posts.ko.json` / `public/content/posts.en.json`을 수정해서 커밋/푸시하면 GitHub Pages로 자동 배포됩니다. (사이트에서는 읽기 전용)',
+        '`public/content/posts.ko.json`과 `public/content/posts.en.json`을 수정한 뒤 커밋하면 GitHub Pages에 자동 반영됩니다.',
       postsHeading: '게시글',
-      postKicker: '게시글',
+      postKicker: '포스트',
     },
     guestbook: {
       kicker: '방명록',
-      title: '한 줄 남겨주세요.',
+      title: '방문 기록을 남겨 주세요.',
       note: 'GitHub 계정으로 댓글을 남길 수 있습니다.',
     },
     philosophy: {
       kicker: '철학',
-      title: '코드는 시스템의 일부일 뿐.',
-      quote: '“제 모국어는 엔지니어링입니다.”',
+      title: '코드는 시스템의 일부일 뿐입니다.',
+      quote: '내 첫 번째 언어는 공학입니다.',
       body:
-        '저는 단지 코드를 작성하지 않습니다. 시스템, 인터페이스, 동작, 그리고 “움직임”을 설계합니다. 센싱·제어·지능이 실제 제약 조건 속에서 함께 동작하는 방식을 중요하게 생각합니다.',
+        '저는 단순히 기능을 추가하는 것보다 sensing, control, interface, behavior가 실제 제약 조건 아래에서 함께 동작하는 구조를 더 중요하게 봅니다.',
     },
     contact: {
       kicker: '연락',
       title: '의미 있는 프로젝트와 기술 협업에 열려 있습니다.',
       githubLabel: 'GitHub',
       githubHint: '리포지토리, 코드, 엔지니어링 빌드',
-      emailLabel: '이메일',
-      emailHint: '협업/프로젝트 관련 연락',
-      futureLabel: '향후 글쓰기',
-      futureTitle: '랩 노트 / 블로그',
-      futureHint: '`public/content/posts.ko.json` / `posts.en.json`을 수정해 배포하세요',
+      emailLabel: 'Email',
+      emailHint: '협업 또는 프로젝트 관련 연락',
+      futureLabel: '다음 글',
+      futureTitle: '블로그 / 노트',
+      futureHint: '리포지토리의 posts JSON을 수정하면 바로 배포됩니다.',
     },
   },
   en: {
     locale: 'en-CA',
-    langName: 'EN',
     langToggle: 'KO',
     nav: [
       { id: 'about', label: 'About' },
@@ -161,30 +156,34 @@ const CONTENT_BY_LANG = {
       eyebrow: 'Republic of Korea · AI & Engineering',
       accent: 'My first language is engineering.',
       description:
-        'I build systems that sense, decide, and move — combining software, AI, robotics, and control into real-world engineering projects.',
+        'I build systems that sense, decide, and move by combining software, AI, robotics, and control into real-world engineering projects.',
       meta: ['Boin High School Student', 'AI Instructor', 'Student Developer', 'Systems-first Builder'],
-      actions: { projects: 'View Projects', github: 'GitHub', blog: 'Lab Notes' },
+      actions: {
+        projects: 'View Projects',
+        github: 'GitHub',
+        blog: 'Lab Notes',
+      },
       status: 'Engineering-first portfolio',
       info: [
         { label: 'Identity', value: 'Young Engineer' },
         { label: 'Core Fields', value: 'AI · Robotics · Aerospace' },
         { label: 'Method', value: 'System Design' },
-        { label: 'Approach', value: 'Sense → Decide → Move' },
+        { label: 'Approach', value: 'Sense · Decide · Move' },
       ],
     },
     about: {
       kicker: 'About',
       title: 'Engineering mindset. Software execution.',
       body: [
-        'I am a high school student developer from the Republic of Korea who thinks in systems and builds engineering-driven projects across software, robotics, AI, and control.',
-        'I am especially interested in aerospace engineering, rocket engineering, autonomous systems, computer vision, embedded control, and AI-assisted development.',
+        'I am a student developer from the Republic of Korea who thinks in systems and builds engineering-driven projects across software, robotics, AI, and control.',
+        'My strongest interests are aerospace engineering, rocket engineering, autonomous systems, computer vision, embedded control, and AI-assisted development.',
       ],
     },
     focus: {
       kicker: 'Engineering Focus',
       title: 'Fields I want to build in.',
       cardText:
-        'Engineering-driven exploration through software, systems thinking, and real-world implementation.',
+        'I care about real implementation, system structure, and engineering behavior rather than isolated features.',
       areas: [
         'Aerospace Engineering',
         'Rocket Engineering',
@@ -212,31 +211,28 @@ const CONTENT_BY_LANG = {
       badge: 'Flagship Build',
       githubLink: 'View GitHub',
       summary:
-        'ROS2-based autonomous driving platform built on Jetson Orin Nano, designed as an engineering system rather than just a single demo.',
+        'A ROS2-based autonomous driving platform built on Jetson Orin Nano, designed as an engineering system instead of a one-off demo.',
       highlights: [
         {
           label: 'Problem',
-          text:
-            'Build a real-time robotics platform where perception, decision logic, and actuation operate as one integrated system.',
+          text: 'Build a real-time robotics platform where perception, decision logic, and actuation work as one system.',
         },
         {
           label: 'Architecture',
-          text:
-            'ROS2 node-based structure, Flask control interface, PCA9685 motor and servo control, CSI camera pipeline, YOLO detection, and stereo depth estimation.',
+          text: 'ROS2 nodes, Flask control interface, PCA9685 motor and servo control, CSI camera pipeline, YOLO detection, and depth estimation.',
         },
         {
           label: 'Result',
-          text:
-            'An AI-first autonomous driving prototype that emphasizes integration, control flow, and engineering behavior over flashy demos.',
+          text: 'An AI-first autonomous driving prototype focused on integration quality, control flow, and reliable behavior.',
         },
       ],
     },
     blog: {
       kicker: 'Lab Notes',
       title: 'A deploy-ready post list managed in the repository.',
-      noteStrong: 'Authoring & deploy:',
+      noteStrong: 'Authoring and deploy:',
       note:
-        'Edit `public/content/posts.en.json` / `public/content/posts.ko.json`, then commit & push to deploy to GitHub Pages automatically. (Read-only on the site)',
+        'Edit `public/content/posts.en.json` and `public/content/posts.ko.json`, then commit and push to publish automatically on GitHub Pages.',
       postsHeading: 'Posts',
       postKicker: 'Post',
     },
@@ -248,9 +244,9 @@ const CONTENT_BY_LANG = {
     philosophy: {
       kicker: 'Philosophy',
       title: 'Code is only part of the system.',
-      quote: '“My first language is engineering.”',
+      quote: 'My first language is engineering.',
       body:
-        'I do not just write code. I design systems, interfaces, behavior, and motion. I care about how sensing, control, and intelligence work together under real-world constraints.',
+        'I do not just write code. I care about how sensing, interfaces, control, and intelligence work together under real-world constraints.',
     },
     contact: {
       kicker: 'Contact',
@@ -261,7 +257,7 @@ const CONTENT_BY_LANG = {
       emailHint: 'Contact for collaboration or projects',
       futureLabel: 'Future Writing',
       futureTitle: 'Lab Notes / Blog',
-      futureHint: 'Deploy by editing `public/content/posts.*.json` in the repo',
+      futureHint: 'Deploy by editing the posts JSON files in the repository.',
     },
   },
 }
@@ -269,7 +265,7 @@ const CONTENT_BY_LANG = {
 function formatDate(value, locale) {
   if (!value) return ''
   try {
-    return new Date(value).toLocaleDateString(locale || 'en-CA', {
+    return new Date(value).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -284,8 +280,7 @@ function Utterances({ repo, theme = 'github-dark', issueTerm = 'pathname' }) {
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container) return
-    if (container.childNodes.length > 0) return
+    if (!container || container.childNodes.length > 0) return
 
     const script = document.createElement('script')
     script.src = 'https://utteranc.es/client.js'
@@ -306,15 +301,12 @@ function App() {
   const navLinkRefs = useRef({})
 
   const [lang, setLang] = useState(getStoredLang)
-
-  const copy = useMemo(() => {
-    return CONTENT_BY_LANG[lang] ?? CONTENT_BY_LANG[DEFAULT_LANG]
-  }, [lang])
-
-  const [posts, setPosts] = useState(() => [])
-  const [selectedPostId, setSelectedPostId] = useState(() => null)
+  const [posts, setPosts] = useState([])
+  const [selectedPostId, setSelectedPostId] = useState(null)
   const [activeNavId, setActiveNavId] = useState(null)
   const [navIndicator, setNavIndicator] = useState({ left: 0, width: 0, visible: false })
+
+  const copy = useMemo(() => CONTENT_BY_LANG[lang] ?? CONTENT_BY_LANG[DEFAULT_LANG], [lang])
 
   useEffect(() => {
     window.localStorage.setItem(LANG_STORAGE_KEY, lang)
@@ -325,21 +317,21 @@ function App() {
 
     async function loadPosts() {
       try {
-        const url = getPostsUrl(lang)
-        const response = await fetch(url, { signal: controller.signal })
+        const response = await fetch(getPostsUrl(lang), { signal: controller.signal })
         if (!response.ok) throw new Error(`Failed to load posts: ${response.status}`)
         const data = await response.json()
         if (!Array.isArray(data)) throw new Error('Invalid posts format')
 
         setPosts(data)
         setSelectedPostId((current) => {
-          const exists = data.some((post) => post?.id === current)
-          return exists ? current : data[0]?.id ?? null
+          const existing = data.find((post) => post?.id === current)
+          return existing?.id ?? data[0]?.id ?? null
         })
       } catch {
-        if (controller.signal.aborted) return
-        setPosts([])
-        setSelectedPostId(null)
+        if (!controller.signal.aborted) {
+          setPosts([])
+          setSelectedPostId(null)
+        }
       }
     }
 
@@ -347,87 +339,14 @@ function App() {
     return () => controller.abort()
   }, [lang])
 
-  const selectedPost = useMemo(() => {
-    return posts.find((post) => post.id === selectedPostId) ?? posts[0] ?? null
-  }, [posts, selectedPostId])
-
-  const skills = copy.stack.skills
-  const focusAreas = copy.focus.areas
-  const projectHighlights = copy.projects.highlights
+  const selectedPost = useMemo(
+    () => posts.find((post) => post.id === selectedPostId) ?? posts[0] ?? null,
+    [posts, selectedPostId],
+  )
 
   const toggleLang = useCallback(() => {
     setLang((current) => (current === 'ko' ? 'en' : 'ko'))
   }, [])
-
-  useEffect(() => {
-    const navIds = (copy.nav || []).map((item) => item.id)
-    const sections = navIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean)
-
-    if (!sections.length) return
-
-    const headerEl = headerRef.current
-    let topOffset = 0
-
-    if (headerEl) {
-      const headerStyle = window.getComputedStyle(headerEl)
-      const headerPosition = headerStyle.position
-      if (headerPosition === 'sticky' || headerPosition === 'fixed') {
-        topOffset = headerEl.getBoundingClientRect().height + 12
-      }
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const candidates = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-
-        const next = candidates[0]?.target?.id ?? null
-        if (next && navIds.includes(next)) setActiveNavId(next)
-      },
-      {
-        root: null,
-        threshold: [0.15, 0.35, 0.55, 0.75],
-        rootMargin: `-${topOffset}px 0px -65% 0px`,
-      },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [copy.nav])
-
-  const updateNavIndicator = useCallback(() => {
-    const navEl = navRef.current
-    const linkEl = activeNavId ? navLinkRefs.current[activeNavId] : null
-
-    if (!navEl || !linkEl) {
-      setNavIndicator((current) => (current.visible ? { ...current, visible: false } : current))
-      return
-    }
-
-    const navBox = navEl.getBoundingClientRect()
-    const linkBox = linkEl.getBoundingClientRect()
-    const left = Math.max(0, linkBox.left - navBox.left)
-    const width = Math.max(8, linkBox.width)
-
-    setNavIndicator({ left, width, visible: true })
-  }, [activeNavId])
-
-  useEffect(() => {
-    const raf = window.requestAnimationFrame(() => updateNavIndicator())
-    return () => window.cancelAnimationFrame(raf)
-  }, [updateNavIndicator, lang])
-
-  useEffect(() => {
-    function handleResize() {
-      updateNavIndicator()
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [updateNavIndicator])
 
   const scrollToSection = useCallback((id) => {
     const target = document.getElementById(id)
@@ -437,9 +356,8 @@ function App() {
     let offset = 0
 
     if (headerEl) {
-      const headerStyle = window.getComputedStyle(headerEl)
-      const headerPosition = headerStyle.position
-      if (headerPosition === 'sticky' || headerPosition === 'fixed') {
+      const position = window.getComputedStyle(headerEl).position
+      if (position === 'sticky' || position === 'fixed') {
         offset = headerEl.getBoundingClientRect().height + 8
       }
     }
@@ -462,6 +380,68 @@ function App() {
     },
     [scrollToSection],
   )
+
+  useEffect(() => {
+    const navIds = copy.nav.map((item) => item.id)
+    const sections = navIds.map((id) => document.getElementById(id)).filter(Boolean)
+    if (!sections.length) return
+
+    const headerEl = headerRef.current
+    let topOffset = 0
+
+    if (headerEl) {
+      const position = window.getComputedStyle(headerEl).position
+      if (position === 'sticky' || position === 'fixed') {
+        topOffset = headerEl.getBoundingClientRect().height + 12
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const next = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]?.target?.id
+
+        if (next) setActiveNavId(next)
+      },
+      {
+        threshold: [0.15, 0.35, 0.55, 0.75],
+        rootMargin: `-${topOffset}px 0px -65% 0px`,
+      },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [copy.nav])
+
+  const updateNavIndicator = useCallback(() => {
+    const navEl = navRef.current
+    const linkEl = activeNavId ? navLinkRefs.current[activeNavId] : null
+
+    if (!navEl || !linkEl) {
+      setNavIndicator((current) => (current.visible ? { ...current, visible: false } : current))
+      return
+    }
+
+    const navBox = navEl.getBoundingClientRect()
+    const linkBox = linkEl.getBoundingClientRect()
+
+    setNavIndicator({
+      left: Math.max(0, linkBox.left - navBox.left),
+      width: Math.max(8, linkBox.width),
+      visible: true,
+    })
+  }, [activeNavId])
+
+  useEffect(() => {
+    const raf = window.requestAnimationFrame(updateNavIndicator)
+    return () => window.cancelAnimationFrame(raf)
+  }, [updateNavIndicator, lang])
+
+  useEffect(() => {
+    window.addEventListener('resize', updateNavIndicator)
+    return () => window.removeEventListener('resize', updateNavIndicator)
+  }, [updateNavIndicator])
 
   return (
     <div className="app-shell">
@@ -524,19 +504,10 @@ function App() {
             </div>
 
             <div className="hero-actions">
-              <a
-                className="btn btn-primary"
-                href="#projects"
-                onClick={(event) => handleSectionLinkClick(event, 'projects')}
-              >
+              <a className="btn btn-primary" href="#projects" onClick={(event) => handleSectionLinkClick(event, 'projects')}>
                 {copy.hero.actions.projects}
               </a>
-              <a
-                className="btn btn-secondary"
-                href="https://github.com/itsmekk-mario"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn btn-secondary" href="https://github.com/itsmekk-mario" target="_blank" rel="noreferrer">
                 {copy.hero.actions.github}
               </a>
               <a className="btn btn-ghost" href="#blog" onClick={(event) => handleSectionLinkClick(event, 'blog')}>
@@ -582,7 +553,7 @@ function App() {
           </div>
 
           <div className="focus-grid">
-            {focusAreas.map((item) => (
+            {copy.focus.areas.map((item) => (
               <article className="card focus-card" key={item}>
                 <h3>{item}</h3>
                 <p>{copy.focus.cardText}</p>
@@ -598,7 +569,7 @@ function App() {
           </div>
 
           <div className="skills-grid">
-            {Object.entries(skills).map(([category, items]) => (
+            {Object.entries(copy.stack.skills).map(([category, items]) => (
               <article className="card skill-card" key={category}>
                 <h3>{category}</h3>
                 <div className="chip-wrap">
@@ -623,20 +594,15 @@ function App() {
             <article className="card project-card glass">
               <div className="project-topline">
                 <span className="project-badge">{copy.projects.badge}</span>
-                <a
-                  className="inline-link"
-                  href="https://github.com/itsmekk-mario"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {copy.projects.githubLink} →
+                <a className="inline-link" href="https://github.com/itsmekk-mario" target="_blank" rel="noreferrer">
+                  {copy.projects.githubLink}
                 </a>
               </div>
 
               <p className="project-summary">{copy.projects.summary}</p>
 
               <div className="project-detail-grid">
-                {projectHighlights.map((item) => (
+                {copy.projects.highlights.map((item) => (
                   <div className="project-block" key={item.label}>
                     <h4>{item.label}</h4>
                     <p>{item.text}</p>
@@ -672,6 +638,7 @@ function App() {
                     key={post.id}
                     className={`post-item ${selectedPost?.id === post.id ? 'active' : ''}`}
                     onClick={() => setSelectedPostId(post.id)}
+                    type="button"
                   >
                     <div className="post-item-top">
                       <strong>{post.title}</strong>
@@ -679,7 +646,7 @@ function App() {
                     </div>
                     <p>{post.excerpt}</p>
                     <div className="post-tags">
-                      {post.tags.map((tag) => (
+                      {(post.tags ?? []).map((tag) => (
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
@@ -689,7 +656,7 @@ function App() {
             </aside>
 
             <article className="blog-view card glass">
-              {selectedPost && (
+              {selectedPost ? (
                 <>
                   <div className="post-view-top">
                     <div>
@@ -701,7 +668,7 @@ function App() {
                   <div className="post-meta-line">
                     <span>{formatDate(selectedPost.date, copy.locale)}</span>
                     <div className="post-tags large">
-                      {selectedPost.tags.map((tag) => (
+                      {(selectedPost.tags ?? []).map((tag) => (
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
@@ -710,6 +677,8 @@ function App() {
                   <p className="post-excerpt">{selectedPost.excerpt}</p>
                   <div className="post-content">{selectedPost.content}</div>
                 </>
+              ) : (
+                <p className="post-content">No posts available.</p>
               )}
             </article>
           </div>
@@ -746,12 +715,7 @@ function App() {
           </div>
 
           <div className="contact-grid">
-            <a
-              className="card contact-card"
-              href="https://github.com/itsmekk-mario"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="card contact-card" href="https://github.com/itsmekk-mario" target="_blank" rel="noreferrer">
               <p className="contact-label">{copy.contact.githubLabel}</p>
               <h3>itsmekk-mario</h3>
               <span>{copy.contact.githubHint}</span>
