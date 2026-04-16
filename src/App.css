@@ -631,6 +631,8 @@ button {
 
 .guestbook-card {
   padding: 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .guestbook-note {
@@ -640,11 +642,21 @@ button {
 }
 
 .utterances-frame {
+  position: relative;
   width: 100%;
+  min-height: 220px;
+  z-index: 2;
+  isolation: isolate;
 }
 
-.utterances-frame .utterances {
+.utterances-frame iframe {
+  display: block;
+  width: 100%;
   max-width: 100%;
+  pointer-events: auto;
+  position: relative;
+  z-index: 3;
+  border: 0;
 }
 
 .contact-grid {
