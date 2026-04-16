@@ -133,9 +133,16 @@ button {
 }
 
 .nav {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .nav a {
@@ -144,9 +151,44 @@ button {
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.nav a.active {
+  color: var(--text);
+}
+
 .nav a:hover {
   color: var(--text);
   transform: translateY(-1px);
+}
+
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent-gradient);
+  box-shadow: 0 10px 30px rgba(104, 225, 253, 0.14);
+  transition: transform 220ms ease, width 220ms ease, opacity 220ms ease;
+  pointer-events: none;
+}
+
+.lang-toggle {
+  border: 1px solid rgba(136, 173, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--soft);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.lang-toggle:hover {
+  transform: translateY(-1px);
+  color: var(--text);
+  border-color: rgba(104, 225, 253, 0.45);
+  background: rgba(104, 225, 253, 0.08);
 }
 
 .app {
@@ -643,12 +685,27 @@ button {
     padding: 10px 16px 14px;
   }
 
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .nav {
     gap: 10px 14px;
   }
 
   .nav a {
     font-size: 0.88rem;
+  }
+
+  .nav-indicator {
+    display: none;
+  }
+
+  .lang-toggle {
+    padding: 8px 12px;
+    font-size: 0.86rem;
   }
 
   .section {
