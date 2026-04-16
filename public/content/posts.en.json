@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Designing a Jetson-based Autonomous Vehicle",
+    "date": "2026-04-08",
+    "tags": ["ROS2", "Jetson", "Autonomy"],
+    "excerpt": "How I approached perception, control, and system integration for a student-built autonomous vehicle.",
+    "content": "This project started as a systems problem, not just a coding problem. I needed sensing, decision logic, actuation, and interface layers to work together. I used ROS2 for the overall structure, Jetson Orin Nano as the compute platform, PCA9685 for steering and throttle control, and OpenCV/YOLO for perception. The most important lesson was that reliable motion comes from architecture and interfaces, not just model accuracy."
+  },
+  {
+    "id": 2,
+    "title": "Why I Think in Systems First",
+    "date": "2026-04-06",
+    "tags": ["Engineering", "Systems"],
+    "excerpt": "Software is more useful when it is treated as one part of a larger physical and decision-making system.",
+    "content": "I am interested in building things that sense, decide, and move. That means I care about data flow, control structure, constraints, and reliability. I do not want to write isolated features. I want to design systems that behave correctly in the real world."
+  }
+]

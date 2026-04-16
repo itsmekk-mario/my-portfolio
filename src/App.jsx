@@ -3,11 +3,6 @@ import './App.css'
 
 const DEFAULT_LANG = 'ko'
 const LANG_STORAGE_KEY = 'kown-portfolio-lang-v1'
-const POSTS_STORAGE_PREFIX = 'kown-portfolio-posts-v1'
-
-function getPostsStorageKey(lang) {
-  return `${POSTS_STORAGE_PREFIX}:${lang}`
-}
 
 function getStoredLang() {
   if (typeof window === 'undefined') return DEFAULT_LANG
@@ -15,70 +10,14 @@ function getStoredLang() {
   return stored === 'en' || stored === 'ko' ? stored : DEFAULT_LANG
 }
 
-function getFallbackPosts(lang) {
-  return DEFAULT_POSTS_BY_LANG[lang] ?? DEFAULT_POSTS_BY_LANG[DEFAULT_LANG]
+const POSTS_PATH_BY_LANG = {
+  ko: 'content/posts.ko.json',
+  en: 'content/posts.en.json',
 }
 
-function readPostsFromStorage(lang) {
-  if (typeof window === 'undefined') return getFallbackPosts(lang)
-
-  const storageKey = getPostsStorageKey(lang)
-  const stored = window.localStorage.getItem(storageKey)
-  if (!stored) return getFallbackPosts(lang)
-
-  try {
-    const parsed = JSON.parse(stored)
-    if (Array.isArray(parsed) && parsed.length > 0) return parsed
-  } catch {
-    // ignore broken local data
-  }
-
-  return getFallbackPosts(lang)
-}
-
-const DEFAULT_POSTS_BY_LANG = {
-  ko: [
-    {
-      id: 1,
-      title: 'Jetson 기반 자율주행 차량 설계',
-      date: '2026-04-08',
-      tags: ['ROS2', 'Jetson', 'Autonomy'],
-      excerpt: '학생 자율주행 프로젝트에서 인지·제어·시스템 통합을 어떻게 설계했는지 정리했습니다.',
-      content:
-        '이 프로젝트는 “코드를 잘 짜는 일”보다 “시스템을 설계하는 일”에 가까웠습니다. 센싱, 판단 로직, 구동, 인터페이스가 한 덩어리로 안정적으로 동작해야 했기 때문입니다. 전체 구조는 ROS2 노드 기반으로 잡고, Jetson Orin Nano를 연산 플랫폼으로 사용했습니다. 조향·스로틀은 PCA9685로 PWM 제어를 구성했고, OpenCV/YOLO로 인지 파이프라인을 만들었습니다. 가장 큰 교훈은, 믿을 수 있는 움직임은 모델 정확도보다 아키텍처와 인터페이스에서 나온다는 점이었습니다.',
-    },
-    {
-      id: 2,
-      title: '왜 저는 항상 시스템부터 생각하는가',
-      date: '2026-04-06',
-      tags: ['Engineering', 'Systems'],
-      excerpt: '소프트웨어를 “전체 시스템의 일부”로 두고 설계할 때 더 강해진다고 믿습니다.',
-      content:
-        '저는 센싱하고, 판단하고, 움직이는 것을 만드는 데 관심이 있습니다. 그래서 데이터 흐름, 제어 구조, 제약 조건, 신뢰성을 먼저 봅니다. 고립된 기능을 만드는 데서 끝내고 싶지 않습니다. 실제 세계에서 올바르게 동작하는 시스템을 설계하고 싶습니다.',
-    },
-  ],
-  en: [
-    {
-      id: 1,
-      title: 'Designing a Jetson-based Autonomous Vehicle',
-      date: '2026-04-08',
-      tags: ['ROS2', 'Jetson', 'Autonomy'],
-      excerpt:
-        'How I approached perception, control, and system integration for a student-built autonomous vehicle.',
-      content:
-        'This project started as a systems problem, not just a coding problem. I needed sensing, decision logic, actuation, and interface layers to work together. I used ROS2 for the overall structure, Jetson Orin Nano as the compute platform, PCA9685 for steering and throttle control, and OpenCV/YOLO for perception. The most important lesson was that reliable motion comes from architecture and interfaces, not just model accuracy.',
-    },
-    {
-      id: 2,
-      title: 'Why I Think in Systems First',
-      date: '2026-04-06',
-      tags: ['Engineering', 'Systems'],
-      excerpt:
-        'Software is more useful when it is treated as one part of a larger physical and decision-making system.',
-      content:
-        'I am interested in building things that sense, decide, and move. That means I care about data flow, control structure, constraints, and reliability. I do not want to write isolated features. I want to design systems that behave correctly in the real world.',
-    },
-  ],
+function getPostsUrl(lang) {
+  const path = POSTS_PATH_BY_LANG[lang] ?? POSTS_PATH_BY_LANG[DEFAULT_LANG]
+  return new URL(path, window.location.origin + import.meta.env.BASE_URL).toString()
 }
 
 const CONTENT_BY_LANG = {
@@ -92,6 +31,7 @@ const CONTENT_BY_LANG = {
       { id: 'stack', label: '기술 스택' },
       { id: 'projects', label: '프로젝트' },
       { id: 'blog', label: '랩 노트' },
+      { id: 'guestbook', label: '방명록' },
       { id: 'contact', label: '연락' },
     ],
     hero: {
@@ -173,36 +113,17 @@ const CONTENT_BY_LANG = {
     },
     blog: {
       kicker: '랩 노트',
-      title: '가벼운 블로그처럼 글을 작성·수정·삭제해보세요.',
-      manage: '글 관리',
-      closeEditor: '에디터 닫기',
-      export: 'JSON 내보내기',
-      noteStrong: '동작 방식:',
+      title: '리포지토리에서 관리되는 배포용 글 목록입니다.',
+      noteStrong: '작성/배포:',
       note:
-        '게시글은 localStorage로 이 브라우저에 저장됩니다. 백엔드 없이도 작성·수정·삭제할 수 있지만, 변경 사항은 이 브라우저에만 남습니다(코드로 배포하기 전까지).',
+        '글은 `public/content/posts.ko.json` / `public/content/posts.en.json`을 수정해서 커밋/푸시하면 GitHub Pages로 자동 배포됩니다. (사이트에서는 읽기 전용)',
       postsHeading: '게시글',
       postKicker: '게시글',
-      actions: { edit: '수정', delete: '삭제' },
-      editor: {
-        editTitle: '게시글 수정',
-        newTitle: '새 게시글',
-        reset: '초기화',
-        labels: {
-          title: '제목',
-          date: '날짜',
-          tags: '태그',
-          excerpt: '요약',
-          content: '본문',
-        },
-        placeholders: {
-          title: '게시글 제목',
-          tags: 'ROS2, Vision, Engineering',
-          excerpt: '짧은 요약',
-          content: '여기에 글을 작성하세요',
-        },
-        publish: '로컬 게시글 발행',
-        update: '게시글 업데이트',
-      },
+    },
+    guestbook: {
+      kicker: '방명록',
+      title: '한 줄 남겨주세요.',
+      note: 'GitHub 계정으로 댓글을 남길 수 있습니다.',
     },
     philosophy: {
       kicker: '철학',
@@ -220,7 +141,7 @@ const CONTENT_BY_LANG = {
       emailHint: '협업/프로젝트 관련 연락',
       futureLabel: '향후 글쓰기',
       futureTitle: '랩 노트 / 블로그',
-      futureHint: '지금은 위 에디터로 로컬 노트를 작성하세요',
+      futureHint: '`public/content/posts.ko.json` / `posts.en.json`을 수정해 배포하세요',
     },
   },
   en: {
@@ -233,6 +154,7 @@ const CONTENT_BY_LANG = {
       { id: 'stack', label: 'Stack' },
       { id: 'projects', label: 'Projects' },
       { id: 'blog', label: 'Lab Notes' },
+      { id: 'guestbook', label: 'Guestbook' },
       { id: 'contact', label: 'Contact' },
     ],
     hero: {
@@ -311,30 +233,17 @@ const CONTENT_BY_LANG = {
     },
     blog: {
       kicker: 'Lab Notes',
-      title: 'Write, edit, and remove posts like a lightweight blog.',
-      manage: 'Manage Posts',
-      closeEditor: 'Close Editor',
-      export: 'Export JSON',
-      noteStrong: 'How this works:',
+      title: 'A deploy-ready post list managed in the repository.',
+      noteStrong: 'Authoring & deploy:',
       note:
-        'Posts are saved in this browser using localStorage. That means you can write, edit, and delete posts here without a backend, but the changes are local to your browser unless you later publish them from code.',
+        'Edit `public/content/posts.en.json` / `public/content/posts.ko.json`, then commit & push to deploy to GitHub Pages automatically. (Read-only on the site)',
       postsHeading: 'Posts',
       postKicker: 'Post',
-      actions: { edit: 'Edit', delete: 'Delete' },
-      editor: {
-        editTitle: 'Edit Post',
-        newTitle: 'New Post',
-        reset: 'Reset',
-        labels: { title: 'Title', date: 'Date', tags: 'Tags', excerpt: 'Excerpt', content: 'Content' },
-        placeholders: {
-          title: 'Post title',
-          tags: 'ROS2, Vision, Engineering',
-          excerpt: 'Short summary',
-          content: 'Write your post here',
-        },
-        publish: 'Publish Local Post',
-        update: 'Update Post',
-      },
+    },
+    guestbook: {
+      kicker: 'Guestbook',
+      title: 'Leave a note.',
+      note: 'Comments are posted with a GitHub account.',
     },
     philosophy: {
       kicker: 'Philosophy',
@@ -352,7 +261,7 @@ const CONTENT_BY_LANG = {
       emailHint: 'Contact for collaboration or projects',
       futureLabel: 'Future Writing',
       futureTitle: 'Lab Notes / Blog',
-      futureHint: 'Use the editor above for local notes now',
+      futureHint: 'Deploy by editing `public/content/posts.*.json` in the repo',
     },
   },
 }
@@ -370,6 +279,27 @@ function formatDate(value, locale) {
   }
 }
 
+function Utterances({ repo, theme = 'github-dark', issueTerm = 'pathname' }) {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+    if (container.childNodes.length > 0) return
+
+    const script = document.createElement('script')
+    script.src = 'https://utteranc.es/client.js'
+    script.async = true
+    script.setAttribute('repo', repo)
+    script.setAttribute('issue-term', issueTerm)
+    script.setAttribute('theme', theme)
+    script.setAttribute('crossorigin', 'anonymous')
+    container.appendChild(script)
+  }, [repo, theme, issueTerm])
+
+  return <div ref={containerRef} className="utterances-frame" />
+}
+
 function App() {
   const headerRef = useRef(null)
   const navRef = useRef(null)
@@ -381,34 +311,41 @@ function App() {
     return CONTENT_BY_LANG[lang] ?? CONTENT_BY_LANG[DEFAULT_LANG]
   }, [lang])
 
-  const [posts, setPosts] = useState(() => {
-    return readPostsFromStorage(getStoredLang())
-  })
-
-  const [selectedPostId, setSelectedPostId] = useState(() => {
-    const initialLang = getStoredLang()
-    const initialPosts = readPostsFromStorage(initialLang)
-    return initialPosts[0]?.id ?? null
-  })
+  const [posts, setPosts] = useState(() => [])
+  const [selectedPostId, setSelectedPostId] = useState(() => null)
   const [activeNavId, setActiveNavId] = useState(null)
   const [navIndicator, setNavIndicator] = useState({ left: 0, width: 0, visible: false })
-  const [adminOpen, setAdminOpen] = useState(false)
-  const [form, setForm] = useState({
-    id: null,
-    title: '',
-    date: '2026-04-08',
-    tags: '',
-    excerpt: '',
-    content: '',
-  })
 
   useEffect(() => {
     window.localStorage.setItem(LANG_STORAGE_KEY, lang)
   }, [lang])
 
   useEffect(() => {
-    window.localStorage.setItem(getPostsStorageKey(lang), JSON.stringify(posts))
-  }, [lang, posts])
+    const controller = new AbortController()
+
+    async function loadPosts() {
+      try {
+        const url = getPostsUrl(lang)
+        const response = await fetch(url, { signal: controller.signal })
+        if (!response.ok) throw new Error(`Failed to load posts: ${response.status}`)
+        const data = await response.json()
+        if (!Array.isArray(data)) throw new Error('Invalid posts format')
+
+        setPosts(data)
+        setSelectedPostId((current) => {
+          const exists = data.some((post) => post?.id === current)
+          return exists ? current : data[0]?.id ?? null
+        })
+      } catch {
+        if (controller.signal.aborted) return
+        setPosts([])
+        setSelectedPostId(null)
+      }
+    }
+
+    void loadPosts()
+    return () => controller.abort()
+  }, [lang])
 
   const selectedPost = useMemo(() => {
     return posts.find((post) => post.id === selectedPostId) ?? posts[0] ?? null
@@ -419,13 +356,7 @@ function App() {
   const projectHighlights = copy.projects.highlights
 
   const toggleLang = useCallback(() => {
-    setLang((current) => {
-      const next = current === 'ko' ? 'en' : 'ko'
-      const nextPosts = readPostsFromStorage(next)
-      setPosts(nextPosts)
-      setSelectedPostId(nextPosts[0]?.id ?? null)
-      return next
-    })
+    setLang((current) => (current === 'ko' ? 'en' : 'ko'))
   }, [])
 
   useEffect(() => {
@@ -531,79 +462,6 @@ function App() {
     },
     [scrollToSection],
   )
-
-  function resetForm() {
-    setForm({
-      id: null,
-      title: '',
-      date: '2026-04-08',
-      tags: '',
-      excerpt: '',
-      content: '',
-    })
-  }
-
-  function handleSavePost(event) {
-    event.preventDefault()
-
-    const nextPost = {
-      id: form.id ?? Date.now(),
-      title: form.title.trim(),
-      date: form.date,
-      tags: form.tags
-        .split(',')
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-      excerpt: form.excerpt.trim(),
-      content: form.content.trim(),
-    }
-
-    if (!nextPost.title || !nextPost.excerpt || !nextPost.content) return
-
-    setPosts((current) => {
-      const exists = current.some((post) => post.id === nextPost.id)
-      const updated = exists
-        ? current.map((post) => (post.id === nextPost.id ? nextPost : post))
-        : [nextPost, ...current]
-
-      return [...updated].sort((a, b) => new Date(b.date) - new Date(a.date))
-    })
-
-    setSelectedPostId(nextPost.id)
-    resetForm()
-  }
-
-  function handleEditPost(post) {
-    setAdminOpen(true)
-    setForm({
-      id: post.id,
-      title: post.title,
-      date: post.date,
-      tags: post.tags.join(', '),
-      excerpt: post.excerpt,
-      content: post.content,
-    })
-  }
-
-  function handleDeletePost(id) {
-    const filtered = posts.filter((post) => post.id !== id)
-    const fallback = DEFAULT_POSTS_BY_LANG[lang] ?? DEFAULT_POSTS_BY_LANG[DEFAULT_LANG]
-    setPosts(filtered.length ? filtered : fallback)
-    if (selectedPostId === id) {
-      setSelectedPostId((filtered[0] ?? fallback[0]).id)
-    }
-    if (form.id === id) resetForm()
-  }
-
-  function handleExportPosts() {
-    const blob = new Blob([JSON.stringify(posts, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'kown-posts.json'
-    link.click()
-    URL.revokeObjectURL(url)
-  }
 
   return (
     <div className="app-shell">
@@ -795,15 +653,6 @@ function App() {
               <p className="section-kicker">{copy.blog.kicker}</p>
               <h2>{copy.blog.title}</h2>
             </div>
-
-            <div className="heading-actions">
-              <button className="btn btn-secondary compact" onClick={() => setAdminOpen((value) => !value)}>
-                {adminOpen ? copy.blog.closeEditor : copy.blog.manage}
-              </button>
-              <button className="btn btn-ghost compact" onClick={handleExportPosts}>
-                {copy.blog.export}
-              </button>
-            </div>
           </div>
 
           <div className="blog-note card subtle-card">
@@ -847,14 +696,6 @@ function App() {
                       <p className="section-kicker">{copy.blog.postKicker}</p>
                       <h3>{selectedPost.title}</h3>
                     </div>
-                    <div className="post-view-actions">
-                      <button className="mini-btn" onClick={() => handleEditPost(selectedPost)}>
-                        {copy.blog.actions.edit}
-                      </button>
-                      <button className="mini-btn danger" onClick={() => handleDeletePost(selectedPost.id)}>
-                        {copy.blog.actions.delete}
-                      </button>
-                    </div>
                   </div>
 
                   <div className="post-meta-line">
@@ -872,72 +713,6 @@ function App() {
               )}
             </article>
           </div>
-
-          {adminOpen && (
-            <section className="editor-panel card">
-              <div className="editor-head">
-                <h3>{form.id ? copy.blog.editor.editTitle : copy.blog.editor.newTitle}</h3>
-                <button className="mini-btn" onClick={resetForm}>
-                  {copy.blog.editor.reset}
-                </button>
-              </div>
-
-              <form className="editor-form" onSubmit={handleSavePost}>
-                <label>
-                  {copy.blog.editor.labels.title}
-                  <input
-                    value={form.title}
-                    onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
-                    placeholder={copy.blog.editor.placeholders.title}
-                  />
-                </label>
-
-                <label>
-                  {copy.blog.editor.labels.date}
-                  <input
-                    type="date"
-                    value={form.date}
-                    onChange={(event) => setForm((current) => ({ ...current, date: event.target.value }))}
-                  />
-                </label>
-
-                <label>
-                  {copy.blog.editor.labels.tags}
-                  <input
-                    value={form.tags}
-                    onChange={(event) => setForm((current) => ({ ...current, tags: event.target.value }))}
-                    placeholder={copy.blog.editor.placeholders.tags}
-                  />
-                </label>
-
-                <label>
-                  {copy.blog.editor.labels.excerpt}
-                  <textarea
-                    rows="3"
-                    value={form.excerpt}
-                    onChange={(event) => setForm((current) => ({ ...current, excerpt: event.target.value }))}
-                    placeholder={copy.blog.editor.placeholders.excerpt}
-                  />
-                </label>
-
-                <label>
-                  {copy.blog.editor.labels.content}
-                  <textarea
-                    rows="8"
-                    value={form.content}
-                    onChange={(event) => setForm((current) => ({ ...current, content: event.target.value }))}
-                    placeholder={copy.blog.editor.placeholders.content}
-                  />
-                </label>
-
-                <div className="editor-actions">
-                  <button className="btn btn-primary compact" type="submit">
-                    {form.id ? copy.blog.editor.update : copy.blog.editor.publish}
-                  </button>
-                </div>
-              </form>
-            </section>
-          )}
         </section>
 
         <section className="section" id="philosophy">
@@ -949,6 +724,18 @@ function App() {
           <div className="card quote-card glass">
             <blockquote>{copy.philosophy.quote}</blockquote>
             <p>{copy.philosophy.body}</p>
+          </div>
+        </section>
+
+        <section id="guestbook" className="section">
+          <div className="section-heading">
+            <p className="section-kicker">{copy.guestbook.kicker}</p>
+            <h2>{copy.guestbook.title}</h2>
+          </div>
+
+          <div className="card glass guestbook-card">
+            <p className="guestbook-note">{copy.guestbook.note}</p>
+            <Utterances repo="itsmekk-mario/my-portfolio" theme="github-dark" issueTerm="pathname" />
           </div>
         </section>
 

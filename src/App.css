@@ -629,6 +629,24 @@ button {
   color: #f4f9ff;
 }
 
+.guestbook-card {
+  padding: 24px;
+}
+
+.guestbook-note {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.utterances-frame {
+  width: 100%;
+}
+
+.utterances-frame .utterances {
+  max-width: 100%;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
